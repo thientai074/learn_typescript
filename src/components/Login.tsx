@@ -10,7 +10,7 @@ interface PaymentLoginFormType {
 const PaymentLoginForm = ({setOpenPaymentLoginForm}: PaymentLoginFormType ) => {
   return (
     <div className="top-0 right-0 left-0 bottom-0 w-screen z-50 bg-[#5b52d7] lg:bg-[#353535]  fixed">
-        <div className='mt-32 lg:h-4/5 lg:w-3/5 lg:bg-[#5b52d7] lg:flex ml-6 mr-6 lg:absolute lg:right-10'>
+        <div className='mt-24 lg:h-4/5 lg:w-3/5 lg:bg-[#5b52d7] lg:flex ml-6 mr-6 lg:absolute lg:right-10'>
             <div className=' lg:bg-white'>
                 {/* H1 */}
                 <div className='flex lg:w-2/5 justify-between mt-6'>
