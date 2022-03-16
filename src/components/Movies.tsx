@@ -1,68 +1,25 @@
-import { Box, Button, Chip, PropTypes, TextField } from '@material-ui/core'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import { ChangeEvent, useContext, useState } from 'react'
-import {MovieContext} from '../contexts/MovieContext'
-import { ThemeContext} from '../contexts/ThemeContext'
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		movieChip: {
-			fontSize: '2rem',
-			padding: '30px 10px',
-			margin: '5px'
-		},
-		movieInput: {
-			marginRight: '5px'
-		}
-	})
-)
+import { XIcon } from "@heroicons/react/solid"
+import { ShoppingCartIcon } from "@heroicons/react/solid"
+import {Dispatch, SetStateAction} from 'react'
 
-const Movies = () => {
-    const classes = useStyles()
-
-    const [movie, setMovie] = useState('')
-
-    const onMovieInputChange  = (event: ChangeEvent<HTMLInputElement>) => {
-        setMovie(event.target.value)
-    }
-
-    const { movies, addMovie, deleteMovie} = useContext(MovieContext)
-
-    const { theme } = useContext(ThemeContext)
-    const chipTheme = theme as Exclude<PropTypes.Color, 'inherit'>
+interface FullScreenPictureType {
+    setOpenFullPicture: Dispatch<SetStateAction<boolean>>
+    setOpenPaymentLoginForm: Dispatch<SetStateAction<boolean>>
+}
+const FullScreenPicture = ({setOpenFullPicture, setOpenPaymentLoginForm}: FullScreenPictureType) => {
     return (
-        <div>
-            <Box display="flex" justifyContent="center" my={5}>
-                <TextField 
-                    label='Your favourite movie ...'
-                    variant='outlined'
-                    value={movie}
-                    className={classes.movieInput}
-                    onChange={onMovieInputChange} 
-                    />
-                <Button 
-                    variant='contained' 
-                    color='primary'
-                    onClick={() => {
-                        addMovie(movie)
-                        setMovie('')
-                    }}>
-                    Add
-                </Button>
-            </Box>
-            <Box display='flex' justifyContent='center' flexWrap='wrap' mx={5}>
-                {movies.map(movie =>(
-                    <Chip 
-                        key={movie.id}
-                        label={movie.title}
-                        clickable
-                        color={chipTheme}
-                        className={classes.movieChip}
-                        onDelete={deleteMovie.bind(this, movie.id)}
-                    />
-                ))}                
-            </Box>
+        <div className="h-screen top-0 right-0 left-0 bottom-0 w-screen z-50 bg-[#2a2a2a] fixed flex">
+            <img className="h-full w-3/5 md:mt-24 md:w-4/5 md:h-4/5  mx-auto" src="https://images.ui8.net/uploads/1_1633605327852.png" alt="" />
+            <div className='relative md:mt-20 md:right-0'>
+               <button onClick={() => setOpenFullPicture(false)} className="absolute lg:top-10 lg:right-10 md:right-4 md:top-10">
+                   <XIcon className="text-white h-10 " />
+               </button>
+               <button className="absolute lg:top-40 lg:right-10 md:right-4 md:top-40">
+                    <ShoppingCartIcon onClick={() => {setOpenFullPicture(false); setOpenPaymentLoginForm(true)}} className="text-white h-10" />
+               </button>
+            </div>
         </div>
     )
 }
 
-export default Movies
+export default FullScreenPicture
