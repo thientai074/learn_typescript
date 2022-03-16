@@ -13,10 +13,10 @@ const PaymentLoginForm = ({setOpenPaymentLoginForm}: PaymentLoginFormType ) => {
         <div className='mt-24 lg:h-4/5 lg:w-3/5 lg:bg-[#5b52d7] lg:flex ml-6 mr-6 lg:absolute lg:right-10'>
             <div className=' lg:bg-white'>
                 {/* H1 */}
-                <div className='flex lg:w-2/5 justify-between mt-6'>
+                <div className='flex lg:w-2/5 justify-between '>
                   <h2 className='font-bold text-lg text-white lg:hidden'>Review your order</h2>
                   <button className='' onClick={() => setOpenPaymentLoginForm(false)} >
-                    <XIcon className='h-6 text-white lg:absolute lg:right-10' />
+                    <XIcon className='h-6 text-white lg:absolute lg:right-10 lg:top-4' />
                   </button>
                 </div>
                 {/* Image */}
