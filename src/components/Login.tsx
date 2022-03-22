@@ -1,81 +1,83 @@
-import React from 'react'
-import { MinusIcon, XIcon } from '@heroicons/react/solid'
-import { CreditCardIcon } from '@heroicons/react/solid'
-import {Dispatch, SetStateAction} from 'react'
+import { useState, FormEventHandler, FormEvent} from 'react'
+import axios from 'axios'
+import { useRouter} from 'next/router'
 
-interface PaymentLoginFormType {
-  setOpenPaymentLoginForm: Dispatch<SetStateAction<boolean>>
-}
 
-const PaymentLoginForm = ({setOpenPaymentLoginForm}: PaymentLoginFormType ) => {
+
+const CommentForm = () => {
+
+    const [comment, setComment] = useState('')
+
+    const handleSubmitComment = async (event : FormEvent<HTMLFormElement>) => {
+        
+        event.preventDefault()
+        
+        console.log("E: ", comment);
+        try {
+            await axios.post('http://localhost:4000/comment',{content: comment}, {withCredentials: true, headers:{"Access-Control-Allow-Credentials":true}} )
+         
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
   return (
-    <div className="top-0 right-0 left-0 bottom-0 w-screen z-50 bg-[#5b52d7] lg:bg-[#353535]  fixed">
-        <div className='mt-24 lg:h-4/5 lg:w-3/5 lg:bg-[#5b52d7] lg:flex ml-6 mr-6 lg:absolute lg:right-10'>
-            <div className=' lg:bg-white'>
-                {/* H1 */}
-                <div className='flex lg:w-2/5 justify-between '>
-                  <h2 className='font-bold text-lg text-white lg:hidden'>Review your order</h2>
-                  <button className='' onClick={() => setOpenPaymentLoginForm(false)} >
-                    <XIcon className='h-6 text-white lg:absolute lg:right-10 lg:top-4' />
-                  </button>
+        <div className='bg-white border-2 border-gray-200 mt-10 rounded-md justify-center px-20'>
+            <div className='flex justify-between pt-10'>
+                <p className='font-sans'>2 Comments</p>
+                <div className='flex'>
+                    <a className='mr-4' href="">Oldest</a>
+                    <a href="">Newest</a>
                 </div>
-                {/* Image */}
-                <div className='flex lg:flex-col lg:w-80 lg:pb-10 bg-white rounded-md mt-4'>
-                  <img className='w-20 lg:w-72 lg:mx-auto  my-2 mx-2 rounded-md' src="https://images.ui8.net/uploads/1_1633605327852.png" alt="" />
-                  <div className='relative mt-4 lg:ml-4'>
-                    <h1 className='font-semibold'>HandyMocuo</h1>
-                    <div className='flex items-center lg:mt-2'>
-                      <p className='text-sm font-semibold mr-4'>$48</p>
-                      <p className='text-gray-400 text-xs'>Standal license</p>
+            </div>
+            <div className=''>
+                <div className='flex mt-10 border-b-2 border-gray-200 pb-6'>
+                    <img className='rounded-full h-12 w-12' src="https://i.pinimg.com/originals/79/20/8a/79208ac14cd0682d093ca381d2a9a95f.jpg" alt="" />
+                    <div className='ml-4'>
+                        <h2 className='font-bold'>Meo Meo</h2>
+                        <p>Well done</p>
+                        <p>5 months ago</p>
                     </div>
-                  </div>
-                  <button className='absolute lg:hidden right-8 top-44 rounded-full bg-red-500 lg:top-10 lg:right-{500}'>
-                    <MinusIcon className='text-white h-6' />
-                  </button>
-                </div>                
-            </div>
-            {/* Div Form */}
-            <div className='mt-10 lg:mx-6'>
-                {/* Form */}
-                <div className='flex justify-between'>
-                  <h1 className='hidden lg:block  lg:text-white lg:text-lg'>Total 200$</h1>
-                  <div>
-                  <h1 className='font-semibold text-gray-300'>Pay with</h1>
-                  <div className='flex'>
-                    <button className='flex rounded-md bg-red-500 h-8 items-center px-2'>
-                      <CreditCardIcon className='h-6 text-gray-400 mr-2' />  
-                      <p>CREDIT CARD</p>
-                    </button>
-                    <button className='ml-2 shadow-inner rounded-md bg-red-500 h-8 items-center px-2'>PAYPAL</button>
-                  </div> </div>                 
+
                 </div>
-                <div className='mt-8 rounde'>
-                  {/* Form */}
-                    <form className='rounded-md lg:text-xs ' >
-                      <input required placeholder='Email Address' type="text" className='w-full  rounded-t h-14 border-2 border-gray-200' />
-                      <input required placeholder='Full Name' type="text" className='w-full  h-14 border-2 border-gray-200' />
-                      <input required placeholder='Password' type="text" className='w-full  h-14 border-2 border-gray-200' />
-                      <input required placeholder='Card Number' type="text" className='w-full  h-14 border-2 border-gray-200' />
-                      <div className='flex'>
-                        <div className='flex'>
-                          <input type="number" className='w-16 border-2  border-gray-200 rounded-bl' placeholder='MM' />
-                          <input type="number" className='w-16 border-2  border-gray-200' placeholder='YY' />
-                        </div>
-                        <input type="text" className='w-20 border-2 border-gray-200 ' placeholder='CVC' />
-                        <div className='flex w-full rounded-b'>
-                          <input type="checkbox" className='h-full w-full lg:w-full border-2 border-gray-200 rounded-br'  />                          
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className=' mt-6 hidden lg:flex lg:justify-between items-center'>
-                    <p className='text-white'>Your card will be charged $0</p>
-                    <button className='rounded-md text-white font-bold bg-green-600 lg:h-10 lg:px-2'>PAY & DOWNLOAD</button>
-                  </div>
+                <div className='flex mt-10 border-b-2 border-gray-200 pb-6'>
+                    <img className='rounded-full h-12 w-12' src="https://i.pinimg.com/736x/8a/ed/fe/8aedfe469628f7427d2214ed966deaa2.jpg" alt="" />
+                    <div className='ml-4'>
+                        <h2 className='font-bold'>Meo Meo</h2>
+                        <p>Well done</p>
+                        <p>5 months ago</p>
+                    </div>
+
+                </div>
+                <div className='flex mt-10 '>
+                    <img className='rounded-full h-12 w-12' src="http://2.bp.blogspot.com/-hZqFkNjxxkQ/UbqN4w4HF2I/AAAAAAAABdI/SU0RTS5QJBk/s1600/cho.jpg" alt="" />
+                    <div className='ml-4'>
+                        <h2 className='font-bold'>Meo Meo</h2>
+                        <p>Well done</p>
+                        <p>5 months ago</p>
+                    </div>
+
+                </div>
             </div>
+            <div className='mt-10 pb-10 relative '> 
+                <form className='flex-col flex' onSubmit={(event) => handleSubmitComment(event)} >
+                    <input 
+                        type="text" 
+                        className='h-20 w-full border-2 border-gray-200' 
+                        placeholder='Leave a comment, be nice'
+                        onChange={e => setComment(e.target.value)} />
+                    <button 
+                        className=" font-sans mt-4 top-20 w-20 h-12 self-end font-medium 
+                        text-white bg-indigo-600 py-0 px-2 rounded "
+                        // onClick={(event) => handleSubmitComment(event)}
+                        >
+                            Post It
+                    </button>
+                </form>
+            </div>                    
         </div>
-    </div>
   )
 }
 
-export default PaymentLoginForm
+export default CommentForm
