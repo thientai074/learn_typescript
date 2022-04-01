@@ -1,25 +1,44 @@
-import { XIcon } from "@heroicons/react/solid"
-import { ShoppingCartIcon } from "@heroicons/react/solid"
-import {Dispatch, SetStateAction} from 'react'
-
-interface FullScreenPictureType {
-    setOpenFullPicture: Dispatch<SetStateAction<boolean>>
-    setOpenPaymentLoginForm: Dispatch<SetStateAction<boolean>>
-}
-const FullScreenPicture = ({setOpenFullPicture, setOpenPaymentLoginForm}: FullScreenPictureType) => {
-    return (
-        <div className="h-screen top-0 right-0 left-0 bottom-0 w-screen z-50 bg-[#2a2a2a] fixed flex">
-            <img className="h-full w-3/5 md:mt-24 md:w-4/5 md:h-4/5  mx-auto" src="https://images.ui8.net/uploads/1_1633605327852.png" alt="" />
-            <div className='relative md:mt-20 md:right-0'>
-               <button onClick={() => setOpenFullPicture(false)} className="absolute lg:top-10 lg:right-10 md:right-4 md:top-10">
-                   <XIcon className="text-white h-10 " />
-               </button>
-               <button className="absolute lg:top-40 lg:right-10 md:right-4 md:top-40">
-                    <ShoppingCartIcon onClick={() => {setOpenFullPicture(false); setOpenPaymentLoginForm(true)}} className="text-white h-10" />
-               </button>
-            </div>
-        </div>
-    )
-}
-
-export default FullScreenPicture
+  <div className=' border-2 border-gray-200 mt-10 py-10 md:py-16 rounded-md px-10 md:px-32 lg:px-56'>
+                        {/* Description and Highlights sections */}
+                        <div className=' justify-items-center pb-8 border-b '>
+                            <p className='font-semibold mb-4'>Overview</p>
+                            <p className='text-gray-500 text-justify'>
+                               {image.description}
+                            </p>
+                        </div>
+                        <div className='py-8 border-b ' >
+                            <p className='font-semibold mb-4'>Highlight</p>
+                            <div className='flex flex-wrap justify-between '>
+                                {imageHighlights&&imageHighlights.map((highlight) => (
+                                    <span key={uuidv4()} 
+                                          className='w-2/5 text-gray-500 flex mt-2 items-center'>
+                                        <CheckIcon className="font-bold text-blue-500 h-5 w-5 mr-2" />
+                                        <p>{highlight}</p>
+                                    </span>       
+                                ))}                   
+                            </div>                            
+                        </div>
+                        <div className='pt-8'>
+                        <p className='font-semibold mb-4'>Compatibility</p>
+                            <div className='flex items-center justify-between'>                             
+                                <div className='flex items-center'>                                
+                                   <span className='app-icon'>
+                                        <svg width="16px" height="16px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" ><g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"><g fill="#dc3d84"><path d="M6.3877551,10.6767538 L3.2585034,6 L5.73469388,6 L7.63945578,9.13617607 L9.6122449,6 L11.952381,6 L8.83673469,10.6905089 L12.2244898,15.8211829 L9.68027211,15.8211829 L7.55782313,12.4236589 L5.39455782,15.8211829 L3,15.8211829 L6.3877551,10.6767538 Z M17.4378479,12.2448418 C17.4378479,11.951397 17.4106373,11.6694191 17.3562152,11.3988996 C17.3017932,11.1283801 17.2088236,10.8899598 17.0773037,10.6836314 C16.9457837,10.477303 16.7757174,10.3099502 16.5670996,10.1815681 C16.3584818,10.053186 16.0954458,9.98899587 15.7779839,9.98899587 C15.460522,9.98899587 15.192951,10.053186 14.9752628,10.1815681 C14.7575747,10.3099502 14.5829732,10.4795955 14.4514533,10.6905089 C14.3199334,10.9014224 14.2246962,11.1421353 14.165739,11.4126547 C14.1067818,11.6831742 14.0773037,11.9651521 14.0773037,12.258597 C14.0773037,12.5337015 14.1090494,12.8088019 14.1725418,13.0839065 C14.2360341,13.359011 14.3380739,13.6043089 14.4786642,13.8198074 C14.6192545,14.035306 14.7961235,14.2095362 15.0092764,14.3425034 C15.2224294,14.4754706 15.4786627,14.5419532 15.7779839,14.5419532 C16.0954458,14.5419532 16.3607493,14.4777631 16.5739023,14.349381 C16.7870553,14.2209989 16.9571216,14.0490611 17.0841064,13.8335626 C17.2110911,13.618064 17.3017932,13.3727662 17.3562152,13.0976616 C17.4106373,12.8225571 17.4378479,12.5382867 17.4378479,12.2448418 Z M17.1632653,14.9133425 L17.1360544,14.9133425 C16.9092959,15.2984889 16.6122467,15.5758818 16.244898,15.7455296 C15.8775492,15.9151774 15.4625873,16 15,16 C14.4739203,16 14.0113399,15.8968373 13.6122449,15.6905089 C13.2131499,15.4841805 12.884355,15.2044951 12.6258503,14.8514443 C12.3673456,14.4983935 12.1723363,14.0926204 12.0408163,13.6341128 C11.9092964,13.1756052 11.8435374,12.6987645 11.8435374,12.2035763 C11.8435374,11.7267285 11.9092964,11.2659353 12.0408163,10.8211829 C12.1723363,10.3764306 12.3673456,9.98441252 12.6258503,9.64511692 C12.884355,9.30582132 13.2086148,9.03301341 13.5986395,8.82668501 C13.9886641,8.6203566 14.4421743,8.51719395 14.9591837,8.51719395 C15.3764193,8.51719395 15.7732407,8.60660158 16.1496599,8.78541953 C16.526079,8.96423748 16.8231282,9.22787538 17.0408163,9.57634113 L17.0680272,9.57634113 L17.0680272,6 L19,6 L19,15.8211829 L17.1632653,15.8211829 L17.1632653,14.9133425 Z"></path></g></g>
+                                    </svg>
+                                   </span>
+                                    <span className="app app-photoshop ml-2">
+                                        <svg width="16px" height="16px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" ><g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"><g fill="#303030"><path d="M4,6 L4,25.7894737 L8.22680973,25.7894737 L8.22680973,19.6842105 L9.61102812,19.6842105 C11.2177102,19.6842105 13.1704468,19.6578947 14.9007198,18.6315789 C16.7051474,17.5526316 17.9410567,15.5789474 17.9410567,12.7368421 C17.9410567,10.2631579 17.0017656,8.26315789 15.1726199,7.13157895 C13.3434741,6 11.0941193,6 9.66046449,6 L4,6 Z M8.22680973,9.31578947 L9.73461905,9.31578947 C10.5008828,9.31578947 11.5390466,9.31578947 12.3300285,9.89473684 C13.1210105,10.4736842 13.5412196,11.5263158 13.5412196,12.8421053 C13.5412196,14.1052632 13.1457287,15.1842105 12.3300285,15.7894737 C11.5390466,16.3684211 10.5008828,16.3684211 9.73461905,16.3684211 L8.22680973,16.3684211 L8.22680973,9.31578947 Z M27.2309193,12.6722674 C27.3876762,12.6722674 25.9589207,12.1652341 24.0312346,12.1652341 C20.6294357,12.1652341 18.679071,13.7346229 18.679071,16.3422228 C18.679071,20.712367 24.2126639,20.0363226 24.2126639,22.1368891 C24.2126639,22.7646446 23.7137334,23.1992446 22.5571218,23.1992446 C20.9922943,23.1992446 18.8605003,22.402478 18.8605003,22.402478 L18.679071,22.402478 L18.679071,25.3722445 C18.679071,25.3722445 20.1758625,26 22.4664071,26 C26.004278,26 28,24.5030445 28,21.7264336 C28,17.1148449 22.4664071,17.718456 22.4664071,15.9317672 C22.4664071,15.4005895 22.942659,14.9659895 24.0539133,14.9659895 C25.4146328,14.9659895 27.2309193,15.6420339 27.2309193,15.6420339 L27.2309193,12.6722674 Z"></path></g></g>
+                                        </svg>
+                                    </span>
+                                    
+                                </div>
+                                <div className='flex'>
+                                    <span>
+                                        <DownloadIcon width={14} height={16} />
+                                    </span>
+                                    <p className='text-gray-500 text-xs ml-2'>388.9 MB in 2 Files</p>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
