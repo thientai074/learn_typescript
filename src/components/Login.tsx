@@ -50,7 +50,7 @@ const CommentForm = ({urlImageLink, image, objectId}: CommentFormType) => {
                         {commentTitle}
                     </p>                    
                 </div>
-                <p className='font-sans'>
+                <p>
                 {commentLength}
                 </p>
                 
